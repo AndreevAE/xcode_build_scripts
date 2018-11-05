@@ -11,13 +11,22 @@ touch "/Users/$(whoami)/Desktop/changelogs/build_${buildNumber}_change.log"
 git log --pretty=format:"%h - %an, %ar : %s" ${commit}.. > "/Users/$(whoami)/Desktop/changelogs/build_${buildNumber}_change.log"
 # git log --pretty=fuller ${commit}.. > "/Users/alexander/Desktop/changelogs/build_${buildNumber}_change.log"
 
+# slack file upload setup
+# https://github.com/rockymadden/slack-cli
+# export SLACK_CLI_TOKEN='token'
+# slack chat send [<text> [channel]]
+# slack file upload [<file> [channels]]
+
+slack file upload --file "/Users/$(whoami)/Desktop/changelogs/build_${buildNumber}_change.log" --channels [channels] --comment "build_${buildNumber}"
+rm "/Users/$(whoami)/Desktop/changelogs/build_${buildNumber}_change.log"
+
 # increment build number
 buildNumber=$(($buildNumber + 1))
 
 # create new tag with incremented build number
-# git tag build_${buildNumber}
+git tag build_${buildNumber}
 
 # move next 2 lines to "Increment Build script"
 # commit incremented build number in Info.plist
 # git commit -m "build no. ${buildNumber}"
-# git push origin develop
+# git push origin HEAD
