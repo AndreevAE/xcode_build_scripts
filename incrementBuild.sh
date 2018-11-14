@@ -2,5 +2,5 @@ buildNumber=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${PROJECT_DIR}
 buildNumber=$(($buildNumber + 1))
 /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $buildNumber" "${PROJECT_DIR}/${INFOPLIST_FILE}"
 git commit -m "build no. ${buildNumber}"
-git push origin develop
+#git push origin HEAD
 git tag build_${buildNumber}
